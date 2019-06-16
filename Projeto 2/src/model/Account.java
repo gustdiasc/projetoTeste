@@ -10,9 +10,10 @@ public class Account {
 	private long amount;
 	private String address;
 	private int age;
+	private String gender;
 	private String email;
 	
-	public Account(long number, String name, long aadhar,String panNo, long amount, String address, int age, String email) {
+	public Account(long number, String name, long aadhar,String panNo, long amount, String address, int age,String gender, String email) {
 		super();
 		this.number = number;
 		this.name = name;
@@ -21,8 +22,12 @@ public class Account {
 		this.address = address;
 		this.age = age;
 		this.email = email;
+		this.gender = gender;
 		this.panNo = panNo;
 	}
+	
+	public Account() {}
+	
 	public long getNumber() {
 		return number;
 	}
@@ -70,6 +75,18 @@ public class Account {
 	}
 	public void setPanNo(String panNo) {
 		this.panNo = panNo;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	
+	public boolean checkGender(String gender) {
+		if (gender.equalsIgnoreCase("male") || gender.equalsIgnoreCase("female"))
+			return true;
+		return false;
 	}
 	
 	
