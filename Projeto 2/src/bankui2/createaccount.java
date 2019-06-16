@@ -7,6 +7,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
+import model.Account;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -91,7 +94,9 @@ class createaccount extends JFrame  implements ActionListener {
 	
 	}
 	
-
+private void createAccountObj(long accountNumber, String name, long aadharNumber,String panNo,long amount,String address,int age,String gender,String email) {
+	//Account acc = new Account(accountNumber, name, aadharNumber, opacity, email, age, email)
+}
 
 	
 public void actionPerformed(ActionEvent e){

@@ -2,15 +2,17 @@ package model;
 
 public class Account {
 
-	private String number;
+	private long number;
 	private String name;
-	private String aadhar;
-	private float amount;
+	private long aadhar;
+	private String panNo;
+
+	private long amount;
 	private String address;
 	private int age;
 	private String email;
 	
-	public Account(String number, String name, String aadhar, float amount, String address, int age, String email) {
+	public Account(long number, String name, long aadhar,String panNo, long amount, String address, int age, String email) {
 		super();
 		this.number = number;
 		this.name = name;
@@ -19,11 +21,12 @@ public class Account {
 		this.address = address;
 		this.age = age;
 		this.email = email;
+		this.panNo = panNo;
 	}
-	public String getNumber() {
+	public long getNumber() {
 		return number;
 	}
-	public void setNumber(String number) {
+	public void setNumber(long number) {
 		this.number = number;
 	}
 	public String getName() {
@@ -32,16 +35,16 @@ public class Account {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getAadhar() {
+	public long getAadhar() {
 		return aadhar;
 	}
-	public void setAadhar(String aadhar) {
+	public void setAadhar(long aadhar) {
 		this.aadhar = aadhar;
 	}
-	public float getAmount() {
+	public long getAmount() {
 		return amount;
 	}
-	public void setAmount(float amount) {
+	public void setAmount(long amount) {
 		this.amount = amount;
 	}
 	public String getAddress() {
@@ -61,6 +64,12 @@ public class Account {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getPanNo() {
+		return panNo;
+	}
+	public void setPanNo(String panNo) {
+		this.panNo = panNo;
 	}
 	
 	
