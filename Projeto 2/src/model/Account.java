@@ -134,8 +134,10 @@ public class Account {
 	}
 	
 	public static boolean checkAccountNumber(String number) {
-		if (number.length() <=8 && number.length() > 0 && Long.parseLong(number) != 0)
+		if (number.length() <=8 && number.length() > 0 && Long.parseLong(number) != 0) {
+			System.out.println(Long.parseLong(number));
 			return true;
+		}
 		return false;
 	
 	}
@@ -148,7 +150,7 @@ public class Account {
 	}
 	
 	public static boolean checkAadhar(String aadhar) {
-		if(aadhar.length() == 12  && Long.parseLong(aadhar) != 0)
+		if(aadhar.length() == 12  && checkStringLong(aadhar) && Long.parseLong(aadhar) != 0)
 			return true;
 		return false;
 	}
@@ -160,9 +162,9 @@ public class Account {
 	}
 	
 	public static boolean checkAmount(String number) {
-		if(Long.parseLong(number) < 0)
-			return false;
-		return true;
+		if(checkStringLong(number) && Long.parseLong(number) >= 0)
+			return true;
+		return false;
 	}
 	
 	public static boolean checkEmail(String email) {

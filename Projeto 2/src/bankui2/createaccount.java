@@ -70,7 +70,91 @@ class createaccount extends JFrame implements ActionListener {
 		tf9 = new JTextField();
 		tf9.setBounds(110, 420, 200, 40);
 
-		tf1.setText(" ENETR AADHAR NUMBER ");
+		tf1.addFocusListener(new FocusAdapter() {
+		    public void focusLost(FocusEvent e) {
+		        if(!Account.checkStringInt(tf1.getText()) || !Account.checkAccountNumber(tf1.getText())) {
+		        	JOptionPane.showMessageDialog(null, " Type a correctly account number");
+		        	tf1.setText("");
+		        	tf1.requestFocus();
+		        }
+		    }
+		});
+		tf2.addFocusListener(new FocusAdapter() {
+		    public void focusLost(FocusEvent e) {
+		        if(!Account.checkName(tf2.getText())) {
+		        	JOptionPane.showMessageDialog(null, " Type a name with 100 or less");
+		        	tf2.setText("");
+		        	tf2.requestFocus();
+		        }
+		    }
+		});
+		tf3.addFocusListener(new FocusAdapter() {
+		    public void focusLost(FocusEvent e) {
+		        if(!Account.checkAadhar(tf3.getText())) {
+		        	JOptionPane.showMessageDialog(null, " Type a correct aadhar");
+		        	tf3.setText("");
+		        	tf3.requestFocus();
+		        }
+		    }
+		});
+		tf4.addFocusListener(new FocusAdapter() {
+		    public void focusLost(FocusEvent e) {
+		        if(!Account.checkPanNo(tf4.getText())) {
+		        	JOptionPane.showMessageDialog(null, " Type a correct pan number");
+		        	tf4.setText("");
+		        	tf4.requestFocus();
+		        }
+		    }
+		});
+		
+		tf5.addFocusListener(new FocusAdapter() {
+		    public void focusLost(FocusEvent e) {
+		        if(!Account.checkAmount(tf5.getText())) {
+		        	JOptionPane.showMessageDialog(null, " Type a correct amount");
+		        	tf5.setText("");
+		        	tf5.requestFocus();
+		        }
+		    }
+		});
+		
+		tf6.addFocusListener(new FocusAdapter() {
+		    public void focusLost(FocusEvent e) {
+		        if(!Account.checkAddress(tf6.getText())) {
+		        	JOptionPane.showMessageDialog(null, " Type a address with size <= 100");
+		        	tf6.setText("");
+		        	tf6.requestFocus();
+		        }
+		    }
+		});
+		tf7.addFocusListener(new FocusAdapter() {
+		    public void focusLost(FocusEvent e) {
+		        if(!Account.checkAge(Integer.parseInt(tf7.getText()))) {
+		        	JOptionPane.showMessageDialog(null, " Type a correct age between 18 and 110");
+		        	tf7.setText("");
+		        	tf7.requestFocus();
+		        }
+		    }
+		});
+		tf8.addFocusListener(new FocusAdapter() {
+		    public void focusLost(FocusEvent e) {
+		        if(!Account.checkGender(tf8.getText())) {
+		        	JOptionPane.showMessageDialog(null, " Type a correct gender: male or female");
+		        	tf8.setText("");
+		        	tf8.requestFocus();
+		        }
+		    }
+		});
+		tf9.addFocusListener(new FocusAdapter() {
+		    public void focusLost(FocusEvent e) {
+		        if(!Account.checkEmail(tf9.getText())) {
+		        	JOptionPane.showMessageDialog(null, " Type a correct email");
+		        	tf9.setText("");
+		        	tf9.requestFocus();
+		        }
+		    }
+		});
+		
+		/*tf1.setText(" ENETR AADHAR NUMBER ");
 		tf2.setText(" FULL NAME ");
 		tf3.setText(" AADHAR NUMBER ");
 		tf4.setText(" PAN NUMBER  ");
@@ -78,7 +162,7 @@ class createaccount extends JFrame implements ActionListener {
 		tf6.setText(" FULL  ADDRESS   ");
 		tf7.setText(" AGE  ");
 		tf8.setText("  MALE OR FEMALE ");
-		tf9.setText(" EMAIL ID  ");
+		tf9.setText(" EMAIL ID  ");*/
 
 		c.add(tf1);
 		c.add(tf2);

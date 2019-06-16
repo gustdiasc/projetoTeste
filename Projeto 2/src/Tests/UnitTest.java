@@ -92,6 +92,8 @@ public class UnitTest {
 		assertFalse(result);
 		result = Account.checkAadhar("0000000000000000");
 		assertFalse(result);
+		result = Account.checkAadhar("21452533AAAA");
+		assertFalse(result);
 		result = Account.checkAadhar("21452533");
 		assertFalse(result);
 	}
@@ -116,7 +118,11 @@ public class UnitTest {
 		assertTrue(result);
 		result = Account.checkAmount("-20");
 		assertFalse(result);
+		result = Account.checkAmount("B");
+		assertFalse(result);
+		
 	}
+	
 	public void testEmail() {
 		boolean result;
 		result = Account.checkEmail("test@email.com");
