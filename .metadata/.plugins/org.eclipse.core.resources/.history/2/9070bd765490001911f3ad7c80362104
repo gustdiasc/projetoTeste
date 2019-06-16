@@ -1,0 +1,14 @@
+package model;
+
+public class Account {
+
+	private String number;
+	private String name;
+	private String name;
+	private float amount;
+	private String address;
+	private int age;
+	private String name;
+	
+	
+}
