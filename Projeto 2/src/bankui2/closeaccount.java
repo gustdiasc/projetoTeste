@@ -20,7 +20,7 @@ public class closeaccount extends JFrame implements ActionListener {
 	JButton jb1, jb;
 	JTextField tf, tf1;
 
-	closeaccount() {
+	public closeaccount() {
 		Container c = getContentPane();
 		c.setLayout(null);
 
@@ -38,19 +38,43 @@ public class closeaccount extends JFrame implements ActionListener {
 		tf1.setBounds(110, 70, 200, 40);
 		tf1.setText("ACCOUNT OR AADHAR NUMBER ");
 		tf1.addFocusListener(new FocusAdapter() {
-		    public void focusLost(FocusEvent e) {
-		        if( (!Account.checkStringInt(tf1.getText()) || !Account.checkAccountNumber(tf1.getText()))
-		        	&& !Account.checkAadhar(tf1.getText())) {
-		        	JOptionPane.showMessageDialog(null, " Type a correct account number or aadhar number");
-		        	tf1.setText("");
-		        	tf1.requestFocus();
-		        }
-		    }
+			public void focusLost(FocusEvent e) {
+
+			}
 		});
 
 		c.add(tf1);
 		c.add(jl1);
 		c.add(jb1);
+	}
+
+	public JButton getJb1() {
+		return jb1;
+	}
+
+	public JButton getJb() {
+		return jb;
+	}
+
+	public JTextField getTf() {
+		return tf;
+	}
+
+	public JTextField getTf1() {
+		return tf1;
+	}
+
+	public boolean verifyFields() {
+		boolean result = true;
+
+		if ((!Account.checkStringInt(tf1.getText()) || !Account.checkAccountNumber(tf1.getText()))
+				&& !Account.checkAadhar(tf1.getText())) {
+			JOptionPane.showMessageDialog(null, " Type a correct account number or aadhar number");
+			tf1.setText("");
+			result = false;
+		}
+
+		return result;
 	}
 
 	long getamount(long ss1) {
@@ -79,24 +103,27 @@ public class closeaccount extends JFrame implements ActionListener {
 			String s1 = tf1.getText();
 			long ss1 = Long.parseLong(s1);
 			int i = 0;
-			long acc = getamount(ss1);
-			try {
-				Class.forName("oracle.jdbc.driver.OracleDriver");
-				Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "scott", "hr");
-				PreparedStatement ps = con.prepareStatement("delete from test4 where account=" + ss1 + "");
-				int rs = ps.executeUpdate();
+			if (verifyFields()) {
+				long acc = getamount(ss1);
+				try {
+					Class.forName("oracle.jdbc.driver.OracleDriver");
+					Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "scott",
+							"hr");
+					PreparedStatement ps = con.prepareStatement("delete from test4 where account=" + ss1 + "");
+					int rs = ps.executeUpdate();
 
-				tf1.setText("ACCOUNT OR AADHAR NUMBER ");
-				if (ss1 != acc) {
-					JOptionPane.showMessageDialog(null, " no account found");
+					tf1.setText("ACCOUNT OR AADHAR NUMBER ");
+					if (ss1 != acc) {
+						JOptionPane.showMessageDialog(null, " no account found");
+					}
+
+					if (ss1 == acc) {
+						JOptionPane.showMessageDialog(null, "  account found");
+					}
+				} catch (Exception ex) {
+
+					System.out.println(ex);
 				}
-
-				if (ss1 == acc) {
-					JOptionPane.showMessageDialog(null, "  account found");
-				}
-			} catch (Exception ex) {
-
-				System.out.println(ex);
 			}
 		}
 

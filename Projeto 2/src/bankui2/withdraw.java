@@ -50,34 +50,79 @@ public class withdraw extends JFrame implements ActionListener {
 		tf2.setBounds(110, 120, 200, 40);
 		tf1.setText("ACCOUNT OR AADHAR NUMBER ");
 		tf2.setText(" AMOUNT ");
-		
-		tf1.addFocusListener(new FocusAdapter() {
-		    public void focusLost(FocusEvent e) {
-		        if( (!Account.checkStringInt(tf1.getText()) || !Account.checkAccountNumber(tf1.getText()))
-		        	&& !Account.checkAadhar(tf1.getText())) {
-		        	JOptionPane.showMessageDialog(null, " Type a correct account number or aadhar number");
-		        	tf1.setText("");
-		        	tf1.requestFocus();
-		        }
-		    }
-		});
-		
-		tf2.addFocusListener(new FocusAdapter() {
-		    public void focusLost(FocusEvent e) {
-		        if(!Account.checkAmount(tf2.getText())) {
-		        	JOptionPane.showMessageDialog(null, " Type a correctly ammount");
-		        	tf2.setText("");
-		        	tf2.requestFocus();
-		        }
-		    }
-		});
 
-		
 		c.add(tf1);
 		c.add(tf2);
 		c.add(jl1);
 		c.add(jl2);
 		c.add(jb1);
+	}
+
+	public boolean verifyFields() {
+		boolean result = true;
+
+		if ((!Account.checkStringInt(tf1.getText()) || !Account.checkAccountNumber(tf1.getText()))
+				&& !Account.checkAadhar(tf1.getText())) {
+			JOptionPane.showMessageDialog(null, " Type a correct account number or aadhar number");
+			tf1.setText("");
+			tf1.requestFocus();
+		}
+		
+		if (!Account.checkAmount(tf2.getText())) {
+			JOptionPane.showMessageDialog(null, " Type a correct ammount");
+			tf2.setText("");
+			tf2.requestFocus();
+		}
+
+		return result;
+	}
+
+	public JButton getJb() {
+		return jb;
+	}
+
+	public JButton getJb1() {
+		return jb1;
+	}
+
+	public JTextField getTf3() {
+		return tf3;
+	}
+
+	public JTextField getTf1() {
+		return tf1;
+	}
+
+	public JTextField getTf2() {
+		return tf2;
+	}
+
+	public JFrame getFrame1() {
+		return frame1;
+	}
+
+	public static JTable getTable() {
+		return table;
+	}
+
+	public String[] getColumnNames() {
+		return columnNames;
+	}
+
+	public long getSs1() {
+		return ss1;
+	}
+
+	public long getSs2() {
+		return ss2;
+	}
+
+	public long getBalance() {
+		return balance;
+	}
+
+	public long getAmount() {
+		return amount;
 	}
 
 	long getamount(long ss1) {

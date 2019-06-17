@@ -32,6 +32,15 @@ public class deposit extends JFrame implements ActionListener {
 	static JTable table;
 	String[] columnNames = { "Account No", "Name", "Balance" };
 	long ss1, ss2, balance, amount;
+
+	public JButton getJb() {
+		return jb;
+	}
+
+	public JTextField getTf2() {
+		return tf2;
+	}
+
 	int i;
 
 	public deposit() {
@@ -54,27 +63,6 @@ public class deposit extends JFrame implements ActionListener {
 		tf3.setBounds(110, 120, 200, 40);
 		tf2.setText("ACCOUNT OR AADHAR NUMBER ");
 		tf3.setText(" AMOUNT ");
-		
-		tf2.addFocusListener(new FocusAdapter() {
-		    public void focusLost(FocusEvent e) {
-		        if( (!Account.checkStringInt(tf2.getText()) || !Account.checkAccountNumber(tf2.getText()))
-		        	&& !Account.checkAadhar(tf2.getText())) {
-		        	JOptionPane.showMessageDialog(null, " Type a correct account number or aadhar number");
-		        	tf2.setText("");
-		        	tf2.requestFocus();
-		        }
-		    }
-		});
-		
-		tf3.addFocusListener(new FocusAdapter() {
-		    public void focusLost(FocusEvent e) {
-		        if(!Account.checkAmount(tf3.getText())) {
-		        	JOptionPane.showMessageDialog(null, " Type a correctly ammount");
-		        	tf3.setText("");
-		        	tf3.requestFocus();
-		        }
-		    }
-		});
 
 		c.add(tf2);
 		c.add(tf3);
@@ -82,6 +70,23 @@ public class deposit extends JFrame implements ActionListener {
 		c.add(jl2);
 		c.add(jl3);
 		c.add(jb);
+	}
+
+	public boolean verifyFields() {
+		boolean result = true;
+
+		if ((!Account.checkStringInt(tf2.getText()) || !Account.checkAccountNumber(tf2.getText()))
+				&& !Account.checkAadhar(tf2.getText())) {
+			JOptionPane.showMessageDialog(null, " Type a correct account number or aadhar number");
+			tf2.setText("");
+		}
+
+		if (!Account.checkAmount(tf3.getText())) {
+			JOptionPane.showMessageDialog(null, " Type a correctly ammount");
+			tf3.setText("");
+		}
+
+		return result;
 	}
 
 	long getamount(long ss1) {
@@ -104,10 +109,11 @@ public class deposit extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-
-		if (e.getSource() == jb) {
-			ShowTableData();
-			ShowTableData1();
+		if (verifyFields()) {
+			if (e.getSource() == jb) {
+				ShowTableData();
+				ShowTableData1();
+			}
 		}
 
 	}
@@ -187,7 +193,6 @@ public class deposit extends JFrame implements ActionListener {
 		frame1.add(scroll);
 		frame1.setVisible(true);
 		frame1.setSize(400, 300);
-
 	}
 
 	public static void main(String[] args) {

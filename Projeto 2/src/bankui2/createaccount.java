@@ -71,6 +71,66 @@ public class createaccount extends JFrame implements ActionListener {
 	public JTextField getTf8() {
 		return tf8;
 	}
+	
+	private boolean verifyFields() {
+		boolean result = true;
+		
+		if(!Account.checkStringInt(tf1.getText()) || !Account.checkAccountNumber(tf1.getText())) {
+        	JOptionPane.showMessageDialog(null, " Type a correct account number");
+        	tf1.setText("");
+        	result = false;
+        }
+		
+		if(!Account.checkName(tf2.getText())) {
+        	JOptionPane.showMessageDialog(null, " Type a name with 100 or less");
+        	tf2.setText("");
+        	result = false;
+        }
+		
+        if(!Account.checkAadhar(tf3.getText())) {
+        	JOptionPane.showMessageDialog(null, " Type a correct aadhar");
+        	tf3.setText("");
+        	result = false;
+        }
+		
+        if(!Account.checkPanNo(tf4.getText())) {
+        	JOptionPane.showMessageDialog(null, " Type a correct pan number");
+        	tf4.setText("");
+        	result = false;
+        }
+        
+        if(!Account.checkAmount(tf5.getText())) {
+        	JOptionPane.showMessageDialog(null, " Type a correct amount");
+        	tf5.setText("");
+        	result = false;
+        }
+		
+        if(!Account.checkAddress(tf6.getText())) {
+        	JOptionPane.showMessageDialog(null, " Type an address with size <= 100");
+        	tf6.setText("");
+        	result = false;
+        }        
+		
+		if(!Account.checkAge(Integer.parseInt(tf7.getText()))) {
+        	JOptionPane.showMessageDialog(null, " Type a correct age between 18 and 110");
+        	tf7.setText("");
+        	result = false;
+        }
+		
+		if(!Account.checkGender(tf8.getText())) {
+        	JOptionPane.showMessageDialog(null, " Type a correct gender: male or female");
+        	tf8.setText("");
+        	result = false;
+        }
+		
+		if(!Account.checkEmail(tf9.getText())) {
+        	JOptionPane.showMessageDialog(null, " Type a correct email");
+        	tf9.setText("");
+        	result = false;
+        }
+		
+		return result;
+	}
 
 	public createaccount() {
 		Container c = getContentPane();
@@ -119,90 +179,6 @@ public class createaccount extends JFrame implements ActionListener {
 		tf8.setBounds(110, 370, 200, 40);
 		tf9 = new JTextField();
 		tf9.setBounds(110, 420, 200, 40);
-
-		tf1.addFocusListener(new FocusAdapter() {
-		    public void focusLost(FocusEvent e) {
-		        if(!Account.checkStringInt(tf1.getText()) || !Account.checkAccountNumber(tf1.getText())) {
-		        	JOptionPane.showMessageDialog(null, " Type a correct account number");
-		        	tf1.setText("");
-		        	tf1.requestFocus();
-		        }
-		    }
-		});
-		tf2.addFocusListener(new FocusAdapter() {
-		    public void focusLost(FocusEvent e) {
-		        if(!Account.checkName(tf2.getText())) {
-		        	JOptionPane.showMessageDialog(null, " Type a name with 100 or less");
-		        	tf2.setText("");
-		        	tf2.requestFocus();
-		        }
-		    }
-		});
-		tf3.addFocusListener(new FocusAdapter() {
-		    public void focusLost(FocusEvent e) {
-		        if(!Account.checkAadhar(tf3.getText())) {
-		        	JOptionPane.showMessageDialog(null, " Type a correct aadhar");
-		        	tf3.setText("");
-		        	tf3.requestFocus();
-		        }
-		    }
-		});
-		tf4.addFocusListener(new FocusAdapter() {
-		    public void focusLost(FocusEvent e) {
-		        if(!Account.checkPanNo(tf4.getText())) {
-		        	JOptionPane.showMessageDialog(null, " Type a correct pan number");
-		        	tf4.setText("");
-		        	tf4.requestFocus();
-		        }
-		    }
-		});
-		
-		tf5.addFocusListener(new FocusAdapter() {
-		    public void focusLost(FocusEvent e) {
-		        if(!Account.checkAmount(tf5.getText())) {
-		        	JOptionPane.showMessageDialog(null, " Type a correct amount");
-		        	tf5.setText("");
-		        	tf5.requestFocus();
-		        }
-		    }
-		});
-		
-		tf6.addFocusListener(new FocusAdapter() {
-		    public void focusLost(FocusEvent e) {
-		        if(!Account.checkAddress(tf6.getText())) {
-		        	JOptionPane.showMessageDialog(null, " Type an address with size <= 100");
-		        	tf6.setText("");
-		        	tf6.requestFocus();
-		        }
-		    }
-		});
-		tf7.addFocusListener(new FocusAdapter() {
-		    public void focusLost(FocusEvent e) {
-		        if(!Account.checkAge(Integer.parseInt(tf7.getText()))) {
-		        	JOptionPane.showMessageDialog(null, " Type a correct age between 18 and 110");
-		        	tf7.setText("");
-		        	tf7.requestFocus();
-		        }
-		    }
-		});
-		tf8.addFocusListener(new FocusAdapter() {
-		    public void focusLost(FocusEvent e) {
-		        if(!Account.checkGender(tf8.getText())) {
-		        	JOptionPane.showMessageDialog(null, " Type a correct gender: male or female");
-		        	tf8.setText("");
-		        	tf8.requestFocus();
-		        }
-		    }
-		});
-		tf9.addFocusListener(new FocusAdapter() {
-		    public void focusLost(FocusEvent e) {
-		        if(!Account.checkEmail(tf9.getText())) {
-		        	JOptionPane.showMessageDialog(null, " Type a correct email");
-		        	tf9.setText("");
-		        	tf9.requestFocus();
-		        }
-		    }
-		});
 		
 		/*tf1.setText(" ENETR AADHAR NUMBER ");
 		tf2.setText(" FULL NAME ");
@@ -242,8 +218,7 @@ public class createaccount extends JFrame implements ActionListener {
 			String address, int age, String gender, String email) {
 		Account acc = new Account(accountNumber, name, aadharNumber, panNo, amount, address, age, gender, email);
 		return acc;
-	}
-	
+	}	
 
 	public void actionPerformed(ActionEvent e) {
 
@@ -263,34 +238,36 @@ public class createaccount extends JFrame implements ActionListener {
 			String s9 = tf9.getText();
 
 			Account acc = createAccountObj(ss1, s2, ss3, s4, ss5, s6, ss7, s8, s9);
-
-			try {
-				Class.forName("oracle.jdbc.driver.OracleDriver");
-				Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "scott", "hr");
-				PreparedStatement ps = con.prepareStatement("insert into test4 values(?,?,?,?,?,?,?,?,?)");
-				ps.setLong(1, acc.getNumber());
-				ps.setString(2, acc.getName());
-				ps.setLong(3, acc.getAadhar());
-				ps.setString(4, acc.getPanNo());
-				ps.setLong(5, acc.getAmount());
-				ps.setString(6, acc.getAddress());
-				ps.setInt(7, acc.getAge());
-				ps.setString(8, acc.getGender());
-				ps.setString(9, acc.getEmail());
-
-				ResultSet rs = ps.executeQuery();
-
-				tf1.setText(" ENETR AADHAR NUMBER ");
-				tf2.setText(" FULL NAME ");
-				tf3.setText(" AADHAR NUMBER ");
-				tf4.setText(" PAN NUMBER  ");
-				tf5.setText(" AMOUNT  ");
-				tf6.setText(" FULL  ADDRESS   ");
-				tf7.setText(" AGE  ");
-				tf8.setText("  MALE OR FEMALE ");
-				tf9.setText(" EMAIL ID  ");
-			} catch (Exception ex) {
-				System.out.println(ex);
+			
+			if(verifyFields()) {
+				try {
+					Class.forName("oracle.jdbc.driver.OracleDriver");
+					Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "scott", "hr");
+					PreparedStatement ps = con.prepareStatement("insert into test4 values(?,?,?,?,?,?,?,?,?)");
+					ps.setLong(1, acc.getNumber());
+					ps.setString(2, acc.getName());
+					ps.setLong(3, acc.getAadhar());
+					ps.setString(4, acc.getPanNo());
+					ps.setLong(5, acc.getAmount());
+					ps.setString(6, acc.getAddress());
+					ps.setInt(7, acc.getAge());
+					ps.setString(8, acc.getGender());
+					ps.setString(9, acc.getEmail());
+	
+					ResultSet rs = ps.executeQuery();
+	
+					tf1.setText(" ENETR AADHAR NUMBER ");
+					tf2.setText(" FULL NAME ");
+					tf3.setText(" AADHAR NUMBER ");
+					tf4.setText(" PAN NUMBER  ");
+					tf5.setText(" AMOUNT  ");
+					tf6.setText(" FULL  ADDRESS   ");
+					tf7.setText(" AGE  ");
+					tf8.setText("  MALE OR FEMALE ");
+					tf9.setText(" EMAIL ID  ");
+				} catch (Exception ex) {
+					System.out.println(ex);
+				}
 			}
 		}
 	}

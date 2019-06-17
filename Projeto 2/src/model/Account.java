@@ -27,83 +27,8 @@ public class Account {
 		this.panNo = panNo;
 	}
 
-	public Account() {
-	}
-
-	public long getNumber() {
-		return number;
-	}
-
-	public void setNumber(long number) {
-		this.number = number;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public long getAadhar() {
-		return aadhar;
-	}
-
-	public void setAadhar(long aadhar) {
-		this.aadhar = aadhar;
-	}
-
-	public long getAmount() {
-		return amount;
-	}
-
-	public void setAmount(long amount) {
-		this.amount = amount;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPanNo() {
-		return panNo;
-	}
-
-	public void setPanNo(String panNo) {
-		this.panNo = panNo;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
 	public static boolean checkGender(String gender) {
-		if (gender.equalsIgnoreCase("male") || gender.equalsIgnoreCase("female"))
+		if (gender.equalsIgnoreCase("female") || gender.equalsIgnoreCase("male"))
 			return true;
 		return false;
 	}
@@ -124,6 +49,42 @@ public class Account {
 		}
 	}
 	
+	public long getNumber() {
+		return number;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public long getAadhar() {
+		return aadhar;
+	}
+
+	public String getPanNo() {
+		return panNo;
+	}
+
+	public long getAmount() {
+		return amount;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
 	public static boolean checkStringLong(String value) {
 		try {
 			Long.valueOf(value);
@@ -169,7 +130,7 @@ public class Account {
 	
 	public static boolean checkEmail(String email) {
 		if(email.contains("@"))
-				return true;
+			return true;
 		return false;
 	}
 	

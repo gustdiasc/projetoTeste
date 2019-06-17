@@ -44,21 +44,51 @@ public class searchbyaccountnumber extends JFrame implements ActionListener {
 		tf1.setBounds(110, 70, 200, 40);
 
 		tf1.setText("ACCOUNT OR AADHAR NUMBER ");
-		
-		tf1.addFocusListener(new FocusAdapter() {
-		    public void focusLost(FocusEvent e) {
-		        if( (!Account.checkStringInt(tf1.getText()) || !Account.checkAccountNumber(tf1.getText()))
-		        	&& !Account.checkAadhar(tf1.getText())) {
-		        	JOptionPane.showMessageDialog(null, " Type a correct account number or aadhar number");
-		        	tf1.setText("");
-		        	tf1.requestFocus();
-		        }
-		    }
-		});
 
 		c.add(jb);
 		c.add(jl1);
 		c.add(tf1);
+	}
+
+	public JButton getJb1() {
+		return jb1;
+	}
+
+	public JButton getJb() {
+		return jb;
+	}
+
+	public JTextField getTf1() {
+		return tf1;
+	}
+
+	public JFrame getFrame1() {
+		return frame1;
+	}
+
+	public static JTable getTable() {
+		return table;
+	}
+
+	public String[] getColumnNames() {
+		return columnNames;
+	}
+
+	public long getSs1() {
+		return ss1;
+	}
+
+	public boolean verifyFields() {
+		boolean result = true;
+
+		if ((!Account.checkStringInt(tf1.getText()) || !Account.checkAccountNumber(tf1.getText()))
+				&& !Account.checkAadhar(tf1.getText())) {
+			JOptionPane.showMessageDialog(null, " Type a correct account number or aadhar number");
+			tf1.setText("");
+			result = false;
+		}
+
+		return result;
 	}
 
 	public void actionPerformed(ActionEvent ae) {
@@ -88,36 +118,38 @@ public class searchbyaccountnumber extends JFrame implements ActionListener {
 		String name = "";
 		long amount = 0;
 
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "scott", "hr");
-			PreparedStatement ps = con
-					.prepareStatement("select name,account,amount from test4 where account=" + ss1 + "");
-			ResultSet rs = ps.executeQuery();
-			tf1.setText("ACCOUNT OR AADHAR NUMBER ");
-			int i = 0;
-			if (rs.next()) {
-				accountno = rs.getLong("account");
-				name = rs.getString("name");
-				amount = rs.getLong("amount");
-				model.addRow(new Object[] { accountno, name, amount });
-				i++;
-			}
-			if (i < 1) {
-				JOptionPane.showMessageDialog(null, "No Record Found", "Error", JOptionPane.ERROR_MESSAGE);
-			}
-			if (i == 1) {
-				System.out.println(i + "Record Found");
-			} else {
-				System.out.println(i + "Records Found");
-			}
-		} catch (Exception ex) {
-			System.out.println(ex);
-		}
-		frame1.add(scroll);
-		frame1.setVisible(true);
-		frame1.setSize(400, 300);
+		if (verifyFields()) {
 
+			try {
+				Class.forName("oracle.jdbc.driver.OracleDriver");
+				Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "scott", "hr");
+				PreparedStatement ps = con
+						.prepareStatement("select name,account,amount from test4 where account=" + ss1 + "");
+				ResultSet rs = ps.executeQuery();
+				tf1.setText("ACCOUNT OR AADHAR NUMBER ");
+				int i = 0;
+				if (rs.next()) {
+					accountno = rs.getLong("account");
+					name = rs.getString("name");
+					amount = rs.getLong("amount");
+					model.addRow(new Object[] { accountno, name, amount });
+					i++;
+				}
+				if (i < 1) {
+					JOptionPane.showMessageDialog(null, "No Record Found", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				if (i == 1) {
+					System.out.println(i + "Record Found");
+				} else {
+					System.out.println(i + "Records Found");
+				}
+			} catch (Exception ex) {
+				System.out.println(ex);
+			}
+			frame1.add(scroll);
+			frame1.setVisible(true);
+			frame1.setSize(400, 300);
+		}
 	}
 
 	public static void main(String[] args) {
