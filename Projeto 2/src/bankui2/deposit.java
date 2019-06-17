@@ -7,7 +7,13 @@ import java.awt.Container;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+
 import javax.swing.table.*;
+
+import model.Account;
+
 import java.util.*;
 import javax.swing.*;
 import javax.swing.JButton;
@@ -19,7 +25,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import java.sql.*;
 
-class deposit extends JFrame implements ActionListener {
+public class deposit extends JFrame implements ActionListener {
 	JButton jb, jb1;
 	JTextField tf3, tf1, tf2;
 	JFrame frame1;
@@ -28,7 +34,7 @@ class deposit extends JFrame implements ActionListener {
 	long ss1, ss2, balance, amount;
 	int i;
 
-	deposit() {
+	public deposit() {
 		Container c = getContentPane();
 		c.setLayout(null);
 		c.setBackground(Color.orange);
@@ -48,6 +54,27 @@ class deposit extends JFrame implements ActionListener {
 		tf3.setBounds(110, 120, 200, 40);
 		tf2.setText("ACCOUNT OR AADHAR NUMBER ");
 		tf3.setText(" AMOUNT ");
+		
+		tf2.addFocusListener(new FocusAdapter() {
+		    public void focusLost(FocusEvent e) {
+		        if( (!Account.checkStringInt(tf2.getText()) || !Account.checkAccountNumber(tf2.getText()))
+		        	&& !Account.checkAadhar(tf2.getText())) {
+		        	JOptionPane.showMessageDialog(null, " Type a correct account number or aadhar number");
+		        	tf2.setText("");
+		        	tf2.requestFocus();
+		        }
+		    }
+		});
+		
+		tf3.addFocusListener(new FocusAdapter() {
+		    public void focusLost(FocusEvent e) {
+		        if(!Account.checkAmount(tf3.getText())) {
+		        	JOptionPane.showMessageDialog(null, " Type a correctly ammount");
+		        	tf3.setText("");
+		        	tf3.requestFocus();
+		        }
+		    }
+		});
 
 		c.add(tf2);
 		c.add(tf3);

@@ -17,12 +17,62 @@ import java.io.IOException;
 import java.sql.*;
 import javax.imageio.*;
 
-class createaccount extends JFrame implements ActionListener {
+public class createaccount extends JFrame implements ActionListener {
 	JButton jb, jb1;
 	JTextArea ta;
 	JTextField tf1, tf9, tf2, tf3, tf4, tf5, tf6, tf7, tf8;
 
-	createaccount() {
+	
+	
+	public JButton getJb() {
+		return jb;
+	}
+
+	public JButton getJb1() {
+		return jb1;
+	}
+
+	public JTextArea getTa() {
+		return ta;
+	}
+
+	public JTextField getTf1() {
+		return tf1;
+	}
+
+	public JTextField getTf9() {
+		return tf9;
+	}
+
+	public JTextField getTf2() {
+		return tf2;
+	}
+
+	public JTextField getTf3() {
+		return tf3;
+	}
+
+	public JTextField getTf4() {
+		return tf4;
+	}
+
+	public JTextField getTf5() {
+		return tf5;
+	}
+
+	public JTextField getTf6() {
+		return tf6;
+	}
+
+	public JTextField getTf7() {
+		return tf7;
+	}
+
+	public JTextField getTf8() {
+		return tf8;
+	}
+
+	public createaccount() {
 		Container c = getContentPane();
 
 		c.setLayout(null);
@@ -73,7 +123,7 @@ class createaccount extends JFrame implements ActionListener {
 		tf1.addFocusListener(new FocusAdapter() {
 		    public void focusLost(FocusEvent e) {
 		        if(!Account.checkStringInt(tf1.getText()) || !Account.checkAccountNumber(tf1.getText())) {
-		        	JOptionPane.showMessageDialog(null, " Type a correctly account number");
+		        	JOptionPane.showMessageDialog(null, " Type a correct account number");
 		        	tf1.setText("");
 		        	tf1.requestFocus();
 		        }
@@ -120,7 +170,7 @@ class createaccount extends JFrame implements ActionListener {
 		tf6.addFocusListener(new FocusAdapter() {
 		    public void focusLost(FocusEvent e) {
 		        if(!Account.checkAddress(tf6.getText())) {
-		        	JOptionPane.showMessageDialog(null, " Type a address with size <= 100");
+		        	JOptionPane.showMessageDialog(null, " Type an address with size <= 100");
 		        	tf6.setText("");
 		        	tf6.requestFocus();
 		        }

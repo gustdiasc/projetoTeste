@@ -6,6 +6,8 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,7 +17,9 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-class searchbyaccountnumber extends JFrame implements ActionListener {
+import model.Account;
+
+public class searchbyaccountnumber extends JFrame implements ActionListener {
 	JButton jb1, jb;
 	JTextField tf1;
 	JFrame frame1;
@@ -23,7 +27,7 @@ class searchbyaccountnumber extends JFrame implements ActionListener {
 	String[] columnNames = { "Account No", "Name", "Balance" };
 	long ss1;
 
-	searchbyaccountnumber() {
+	public searchbyaccountnumber() {
 		Container c = getContentPane();
 		c.setLayout(null);
 
@@ -40,6 +44,17 @@ class searchbyaccountnumber extends JFrame implements ActionListener {
 		tf1.setBounds(110, 70, 200, 40);
 
 		tf1.setText("ACCOUNT OR AADHAR NUMBER ");
+		
+		tf1.addFocusListener(new FocusAdapter() {
+		    public void focusLost(FocusEvent e) {
+		        if( (!Account.checkStringInt(tf1.getText()) || !Account.checkAccountNumber(tf1.getText()))
+		        	&& !Account.checkAadhar(tf1.getText())) {
+		        	JOptionPane.showMessageDialog(null, " Type a correct account number or aadhar number");
+		        	tf1.setText("");
+		        	tf1.requestFocus();
+		        }
+		    }
+		});
 
 		c.add(jb);
 		c.add(jl1);
@@ -50,7 +65,6 @@ class searchbyaccountnumber extends JFrame implements ActionListener {
 
 		if (ae.getSource() == jb) {
 			ShowTableData();
-
 		}
 	}
 

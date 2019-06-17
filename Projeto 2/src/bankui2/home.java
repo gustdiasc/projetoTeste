@@ -9,7 +9,7 @@ public class home extends JFrame implements ActionListener {
 
 	JButton b1, b2, b3, b4, b5, b6, b7, b8;
 
-	home() {
+	public home() {
 		Container c = getContentPane();
 		c.setLayout(new GridLayout(3, 2));
 		b1 = new JButton("open new account"); // buttons b 1,2,3,4,5,6

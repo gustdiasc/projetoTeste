@@ -1,14 +1,69 @@
 package Tests;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.awt.AWTEvent;
+import java.awt.Event;
+import java.awt.event.FocusEvent;
+
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import bankui2.*;
 
 
 import model.Account;
 
 public class UnitTest {
+	
+	createaccount createAccount;
+	deposit deposit;
+	home home;
+	searchbyaccountnumber sban;
+	withdraw withdraw;
+	
+	@BeforeEach
+	public void setUp() {
+		this.createAccount = new createaccount();
+		this.deposit = new deposit();
+		this.home = new home();
+		this.sban = new searchbyaccountnumber();
+		this.withdraw = new withdraw();
+	}
+	
+	@Test
+	public void testCreateAccount_AllValid() {
+		this.createAccount.getTf1().setText("123455");
+		this.createAccount.getTf2().setText("Gustavo");
+		this.createAccount.getTf3().setText("123412341422");
+		this.createAccount.getTf4().setText("123042");
+		this.createAccount.getTf5().setText("200");
+		this.createAccount.getTf6().setText("Rua francisco moretzshon");
+		this.createAccount.getTf7().setText("23");
+		this.createAccount.getTf8().setText("male");
+		this.createAccount.getTf9().setText("gustavo.dias.c5@gmail.com");
+		
+		this.createAccount.getJb().doClick();
+	}
+	
+	@Test
+	public void testCreateAccount_AllInvalid() {
+		this.createAccount.getTf1().setText("123451231315");
+		this.createAccount.getTf2().setText("");
+		this.createAccount.dispatchEvent(new FocusEvent(this.createAccount.getTf2(), FocusEvent.FOCUS_LOST));
+		this.createAccount.getTf3().requestFocus();
+		this.createAccount.getTf3().setText("123412341422");
+		this.createAccount.getTf4().setText("123042");
+		this.createAccount.getTf5().setText("0");
+		this.createAccount.getTf6().setText("Rua francisco moretzshon");
+		this.createAccount.getTf7().setText("23");
+		this.createAccount.getTf8().setText("test");
+		this.createAccount.getTf9().setText("test");
+		
+		this.createAccount.getJb().doClick();
+	}
+	
+	
 
 	@Test
 	public void testGender() {
@@ -123,6 +178,7 @@ public class UnitTest {
 		
 	}
 	
+	@Test
 	public void testEmail() {
 		boolean result;
 		result = Account.checkEmail("test@email.com");
@@ -141,8 +197,4 @@ public class UnitTest {
 		result = Account.checkAddress("Teste oasdieisdjsd sidjsidsidj imjdisjdis asiudhasiudhsaudh oiasjdiasdojais jdsd sijdsidjisd isndjisa");
 		assertFalse(result);
 	}
-	
-	
-	
-
 }

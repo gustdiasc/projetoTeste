@@ -5,6 +5,8 @@ import java.awt.Container;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.sql.*;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,7 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-class closeaccount extends JFrame implements ActionListener {
+import model.Account;
+
+public class closeaccount extends JFrame implements ActionListener {
 	JButton jb1, jb;
 	JTextField tf, tf1;
 
@@ -33,6 +37,16 @@ class closeaccount extends JFrame implements ActionListener {
 		tf1 = new JTextField();
 		tf1.setBounds(110, 70, 200, 40);
 		tf1.setText("ACCOUNT OR AADHAR NUMBER ");
+		tf1.addFocusListener(new FocusAdapter() {
+		    public void focusLost(FocusEvent e) {
+		        if( (!Account.checkStringInt(tf1.getText()) || !Account.checkAccountNumber(tf1.getText()))
+		        	&& !Account.checkAadhar(tf1.getText())) {
+		        	JOptionPane.showMessageDialog(null, " Type a correct account number or aadhar number");
+		        	tf1.setText("");
+		        	tf1.requestFocus();
+		        }
+		    }
+		});
 
 		c.add(tf1);
 		c.add(jl1);

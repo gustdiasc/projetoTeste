@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,6 +20,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import model.Account;
+
 public class withdraw extends JFrame implements ActionListener {
 	JButton jb, jb1;
 	JTextField tf3, tf1, tf2;
@@ -26,7 +30,7 @@ public class withdraw extends JFrame implements ActionListener {
 	String[] columnNames = { "Account No", "Name", "Balance" };
 	long ss1, ss2, balance, amount;
 
-	withdraw() {
+	public withdraw() {
 
 		Container c = getContentPane();
 		c.setLayout(null);
@@ -46,6 +50,29 @@ public class withdraw extends JFrame implements ActionListener {
 		tf2.setBounds(110, 120, 200, 40);
 		tf1.setText("ACCOUNT OR AADHAR NUMBER ");
 		tf2.setText(" AMOUNT ");
+		
+		tf1.addFocusListener(new FocusAdapter() {
+		    public void focusLost(FocusEvent e) {
+		        if( (!Account.checkStringInt(tf1.getText()) || !Account.checkAccountNumber(tf1.getText()))
+		        	&& !Account.checkAadhar(tf1.getText())) {
+		        	JOptionPane.showMessageDialog(null, " Type a correct account number or aadhar number");
+		        	tf1.setText("");
+		        	tf1.requestFocus();
+		        }
+		    }
+		});
+		
+		tf2.addFocusListener(new FocusAdapter() {
+		    public void focusLost(FocusEvent e) {
+		        if(!Account.checkAmount(tf2.getText())) {
+		        	JOptionPane.showMessageDialog(null, " Type a correctly ammount");
+		        	tf2.setText("");
+		        	tf2.requestFocus();
+		        }
+		    }
+		});
+
+		
 		c.add(tf1);
 		c.add(tf2);
 		c.add(jl1);
